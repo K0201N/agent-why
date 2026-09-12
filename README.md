@@ -1,8 +1,14 @@
 # agent-why
 
-**Why didn't `$skill` load in this Codex session?**
+[![CI](https://github.com/K0201N/agent-why/actions/workflows/ci.yml/badge.svg)](https://github.com/K0201N/agent-why/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-`agent-why` is a read-only forensic CLI for explicit Codex skill invocation. It reads the persisted rollout for a session and tells you where the skill pipeline stopped.
+**Forensics for coding agents.**
+
+You selected a Codex skill. It didn't behave like it loaded.
+
+`agent-why` reads the persisted Codex session and shows where the explicit skill pipeline actually stopped:
 
 ```text
 $ agent-why skill review-pr
@@ -21,7 +27,9 @@ RESULT      NOT_BOUND
 Codex received the $skill mention as user text, but did not persist it as a structured Skill input.
 ```
 
-A successful diagnosis looks like this:
+Use it when a Codex skill appears to be ignored, behaves differently between sessions, or you need evidence from the affected session instead of inspecting what the current configuration says should happen.
+
+A successful diagnosis can also show that discovery and binding were not the failure point:
 
 ```text
 $ agent-why skill review-pr
@@ -40,7 +48,7 @@ RESULT      INJECTED
 The skill reached model-visible context. Skill discovery/binding was not the failure for this attempt.
 ```
 
-It answers **what happened in that session**, not what the current filesystem says should happen.
+`agent-why` is local-only and read-only. Its default reports are designed to be paste-safe for bug reports.
 
 ## What it checks
 
@@ -104,7 +112,7 @@ The default text and `--json` reports are designed to be shareable in bug report
 
 Only **explicit Codex skill invocation** is in scope. There is no config sync, skill installation, auto-fix, MCP diagnosis, Claude support, GUI, or generic agent dashboard.
 
-See [`docs/evidence-model.md`](docs/evidence-model.md) for the exact evidence contract.
+See [`docs/evidence-model.md`](docs/evidence-model.md) for the exact evidence contract and [`ROADMAP.md`](ROADMAP.md) for the current product direction.
 
 ## Development
 
