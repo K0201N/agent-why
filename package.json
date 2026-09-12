@@ -1,0 +1,41 @@
+{
+  "name": "agent-why",
+  "version": "0.1.3",
+  "description": "Explain why an explicitly selected Codex skill did or did not reach model context.",
+  "type": "module",
+  "bin": {
+    "agent-why": "./bin/agent-why.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "smoke": "node ./bin/agent-why.js --help",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K0201N/agent-why.git"
+  },
+  "homepage": "https://github.com/K0201N/agent-why#readme",
+  "bugs": {
+    "url": "https://github.com/K0201N/agent-why/issues"
+  },
+  "keywords": [
+    "codex",
+    "skills",
+    "debugging",
+    "forensics",
+    "ai-agents",
+    "cli"
+  ],
+  "license": "MIT"
+}
