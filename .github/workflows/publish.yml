@@ -22,4 +22,17 @@ jobs:
       - run: npm test
       - run: npm run smoke
       - run: npm run pack:check
-      - run: npm publish --access public
+      - name: Check whether version already exists on npm
+        id: npm-version
+        shell: bash
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          if npm view "agent-why@${VERSION}" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "agent-why@${VERSION} already exists on npm; skipping publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish to npm
+        if: steps.npm-version.outputs.exists != 'true'
+        run: npm publish --access public
