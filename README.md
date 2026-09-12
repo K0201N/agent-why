@@ -1,6 +1,7 @@
 # agent-why
 
 [![CI](https://github.com/K0201N/agent-why/actions/workflows/ci.yml/badge.svg)](https://github.com/K0201N/agent-why/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/K0201N/agent-why)](https://github.com/K0201N/agent-why/releases/latest)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
