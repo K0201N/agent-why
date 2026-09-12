@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/K0201N/agent-why/actions/workflows/ci.yml/badge.svg)](https://github.com/K0201N/agent-why/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/K0201N/agent-why)](https://github.com/K0201N/agent-why/releases/latest)
+[![npm](https://img.shields.io/npm/v/agent-why)](https://www.npmjs.com/package/agent-why)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -68,24 +69,31 @@ INJECTED    typed selected-skill instructions reached model-visible context
 
 `agent-why` deliberately stops there. It does **not** claim that the model actually followed the skill, because ordinary Codex rollout history does not reliably prove that today.
 
-## Install / run locally
+## Run
 
 Requires Node.js 22 or newer.
 
+Run directly from npm without installing globally:
+
 ```bash
-npm install
-npm link
+npx agent-why skill review-pr
+```
+
+Or install it globally:
+
+```bash
+npm install --global agent-why
 agent-why skill review-pr
 ```
 
 By default it searches top-level rollouts under `CODEX_HOME` or `~/.codex` newest-first and analyzes the most recent session that contains an explicit attempt for that skill.
 
 ```bash
-agent-why skill review-pr               # find the latest session that attempted this skill
-agent-why skill review-pr --thread last # force the latest session even if it did not use the skill
-agent-why skill review-pr --thread 01abc...
-agent-why skill review-pr --file ~/.codex/sessions/.../rollout-....jsonl
-agent-why skill review-pr --json
+npx agent-why skill review-pr               # find the latest session that attempted this skill
+npx agent-why skill review-pr --thread last # force the latest session even if it did not use the skill
+npx agent-why skill review-pr --thread 01abc...
+npx agent-why skill review-pr --file ~/.codex/sessions/.../rollout-....jsonl
+npx agent-why skill review-pr --json
 ```
 
 ## Results
@@ -102,12 +110,14 @@ agent-why skill review-pr --json
 
 The default text and `--json` reports are designed to be shareable in bug reports. They never print conversation text, skill contents, absolute skill paths, thread IDs, or turn IDs. File-system and selector errors are also phrased without echoing private paths or thread selectors.
 
-`agent-why` is local-only and read-only:
+Once running, `agent-why` itself is local-only and read-only:
 
 - no network requests,
 - no config changes,
 - no Codex process spawned,
 - no telemetry.
+
+Using `npx` may contact the npm registry to download the package before `agent-why` starts.
 
 ## Scope of v0.1
 
@@ -117,7 +127,12 @@ See [`docs/evidence-model.md`](docs/evidence-model.md) for the exact evidence co
 
 ## Development
 
+From a local clone, install dependencies and link the CLI before invoking `agent-why` directly:
+
 ```bash
+npm install
+npm link
+agent-why --version
 npm test
 npm run smoke
 npm run pack:check
