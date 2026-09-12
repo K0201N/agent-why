@@ -11,3 +11,7 @@ test('--version matches package.json', () => {
   const output = execFileSync(process.execPath, [bin, '--version'], { encoding: 'utf8' }).trim();
   assert.equal(output, packageJson.version);
 });
+
+test('npm package preserves the agent-why CLI bin entry', () => {
+  assert.equal(packageJson.bin?.['agent-why'], 'bin/agent-why.js');
+});
